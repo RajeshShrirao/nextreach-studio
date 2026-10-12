@@ -1,0 +1,79 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
+
+const pageTitle = "Attribution Badges & Embed Reference | NextReach Studio";
+const pageDescription = "Embed reference codes, drop-in scripts, and SVG badges for client websites engineered by NextReach Studio.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Nav />
+
+  <main class="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#C76B50]/8 rounded-full blur-[140px] pointer-events-none -z-10" aria-hidden="true"></div>
+
+    <header class="text-center max-w-2xl mx-auto mb-12 animate-fade-in-up">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C76B50]/10 border border-[#C76B50]/20 text-[#C76B50] text-xs font-mono font-semibold mb-4">
+        <span>Embed Reference</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold font-display text-[#1F1F23] tracking-tight mb-4">
+        Attribution Embeds &amp; Badges
+      </h1>
+      <p class="text-sm sm:text-base text-[#6E6862] leading-relaxed font-body">
+        Official assets and drop-in widgets for websites engineered by <strong>NextReach Studio</strong>.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+      <div class="card-studio p-6 text-center flex flex-col items-center">
+        <h2 class="text-base font-bold text-[#1F1F23] font-display mb-4">Dark Vector Badge</h2>
+        <div class="my-auto py-4">
+          <img src="/attribution/nextreach-badge-dark.svg" alt="NextReach Dark Badge" width="220" height="40" class="mx-auto" />
+        </div>
+        <a href="/attribution/nextreach-badge-dark.svg" class="text-xs font-mono text-[#C76B50] hover:text-[#D97A5E] font-semibold mt-4">
+          Direct SVG Link →
+        </a>
+      </div>
+
+      <div class="card-studio p-6 text-center flex flex-col items-center bg-[#FAF8F5]">
+        <h2 class="text-base font-bold text-[#1F1F23] font-display mb-4">Light Vector Badge</h2>
+        <div class="my-auto py-4">
+          <img src="/attribution/nextreach-badge-light.svg" alt="NextReach Light Badge" width="220" height="40" class="mx-auto" />
+        </div>
+        <a href="/attribution/nextreach-badge-light.svg" class="text-xs font-mono text-[#C76B50] hover:text-[#D97A5E] font-semibold mt-4">
+          Direct SVG Link →
+        </a>
+      </div>
+    </div>
+
+    <section class="card-studio p-6 sm:p-8 mb-12" aria-labelledby="universal-script-embed">
+      <h2 id="universal-script-embed" class="text-lg font-bold text-[#1F1F23] font-display mb-2">
+        1-Line Universal Script Embed
+      </h2>
+      <p class="text-xs sm:text-sm text-[#6E6862] mb-4 font-body">
+        Paste this script directly before your closing &lt;/body&gt; tag to automatically mount the responsive NextReach attribution pill:
+      </p>
+      <pre class="bg-[#141416] text-[#D4D4D8] p-4 rounded-xl text-xs font-mono overflow-x-auto border border-white/10 leading-relaxed"><code>&lt;script 
+  src="https://www.nextreachstudio.in/attribution/badge.js"
+  data-theme="dark"
+  data-variant="pill"
+  data-phrase="Crafted by"
+  data-client="your-client-site"
+  async&gt;&lt;/script&gt;</code></pre>
+    </section>
+
+    <div class="rounded-2xl p-6 bg-[#FAF8F5] border border-[#1F1F23]/10 text-center">
+      <h2 class="text-base font-bold text-[#1F1F23] font-display mb-2">Looking for the Interactive Generator?</h2>
+      <p class="text-xs sm:text-sm text-[#6E6862] mb-4 font-body">
+        Customize live variants, test phrases, and copy React 19 &amp; Astro components directly into your codebase.
+      </p>
+      <a href="/attribution/" class="btn-premium-primary text-xs inline-flex items-center gap-1.5">
+        <span>Open Attribution Portal</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

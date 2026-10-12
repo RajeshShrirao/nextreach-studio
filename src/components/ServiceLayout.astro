@@ -20,6 +20,7 @@ export interface Props {
   relatedLinks?: { href: string; label: string }[];
   researchLinks?: { href: string; label: string; note: string }[];
   portfolioTags?: string[];
+  faqs?: { question: string; answer: string }[];
 }
 
 const {
@@ -39,11 +40,33 @@ const {
   relatedLinks,
   researchLinks,
   portfolioTags,
+  faqs,
 } = Astro.props;
 
 // Must match the @id values declared in Layout.astro so the entity graph connects.
 const siteURL = "https://www.nextreachstudio.in";
 const ORG_ID = `${siteURL}/#organization`;
+const canonicalPath = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
+
+// Parse priceRange (e.g. "₹15,000 - ₹60,000", "$3,000-$8,000", "₹35,000 - ₹1,50,000") into valid Schema.org
+const rawPriceNumbers = priceRange.replace(/,/g, "").match(/\d+/g)?.map(Number) || [];
+const detectedCurrency = priceRange.includes("$") ? "USD" : priceCurrency;
+let structuredOffer: any = undefined;
+
+if (rawPriceNumbers.length >= 2) {
+  structuredOffer = {
+    "@type": "AggregateOffer",
+    priceCurrency: detectedCurrency,
+    lowPrice: Math.min(...rawPriceNumbers),
+    highPrice: Math.max(...rawPriceNumbers),
+  };
+} else if (rawPriceNumbers.length === 1) {
+  structuredOffer = {
+    "@type": "Offer",
+    priceCurrency: detectedCurrency,
+    price: rawPriceNumbers[0],
+  };
+}
 
 const structuredOffering = offerings.map((o, i) => ({
   "@type": "ListItem",
@@ -55,28 +78,43 @@ const structuredOffering = offerings.map((o, i) => ({
 <Layout title={title} description={description}>
   <!-- Provider referenced by @id so this connects to the Organization entity declared
        in Layout.astro rather than repeating the brand as a separate node. -->
-  <script type="application/ld+json" set:html={JSON.stringify({
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": `${siteURL}${Astro.url.pathname}#service`,
+    "@id": `${siteURL}${canonicalPath}#service`,
     name: serviceTag,
     serviceType: serviceTag,
     description: subheadline,
     provider: { "@id": ORG_ID },
-    offers: { "@type": "Offer", price: priceRange, priceCurrency: priceCurrency },
+    ...(structuredOffer ? { offers: structuredOffer } : {}),
     areaServed: [
       { "@type": "City", name: cityName },
       { "@type": "AdministrativeArea", name: "Maharashtra" },
       { "@type": "Country", name: "India" },
     ],
   })} />
-  <script type="application/ld+json" set:html={JSON.stringify({
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "@id": `${siteURL}${Astro.url.pathname}#offerings`,
+    "@id": `${siteURL}${canonicalPath}#offerings`,
     name: `${serviceTag} capabilities`,
     itemListElement: structuredOffering,
   })} />
+  {faqs && faqs.length > 0 && (
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${siteURL}${canonicalPath}#faq`,
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: f.answer,
+        },
+      })),
+    })} />
+  )}
   <Nav />
   <main class="service-layout container-page-wide relative pt-28">
     <div class="absolute top-0 left-1/4 -translate-y-12 w-[500px] h-[300px] bg-[#C76B50]/6 rounded-full blur-[110px] pointer-events-none -z-10" aria-hidden="true"></div>
@@ -170,6 +208,23 @@ const structuredOffering = offerings.map((o, i) => ({
           <a href="/portfolio/" class="text-[#C76B50] hover:text-[#D97A5E] underline underline-offset-2 transition-colors font-medium">View our portfolio</a>
         </p>
       </div>
+    )}
+
+    {faqs && faqs.length > 0 && (
+      <section class="max-w-4xl mx-auto px-4 mb-16 stagger-parent" aria-labelledby="service-faq-heading">
+        <div class="text-center mb-8">
+          <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-[#C76B50] font-semibold mb-2">Frequently Asked Questions</p>
+          <h2 id="service-faq-heading" class="text-xl sm:text-2xl font-bold text-[#1F1F23] font-display">Common Questions & Specifications</h2>
+        </div>
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <div class="card-studio p-6 shadow-sm">
+              <h3 class="text-base font-bold text-[#1F1F23] font-display mb-2">{faq.question}</h3>
+              <p class="text-sm text-[#6E6862] leading-relaxed font-body">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     )}
 
     <div class="text-center max-w-4xl mx-auto px-4 mb-20 stagger-parent">

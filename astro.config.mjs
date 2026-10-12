@@ -30,6 +30,8 @@ export default defineConfig({
   output: "static",
   redirects: {
     "/services/ecommerce": "/services/ecommerce-website-development-pune/",
-    "/services/ecommerce/": "/services/ecommerce-website-development-pune/",
+    "/sitemap.xml": "/sitemap-index.xml",
+    "/attribution/embed.html": "/attribution/embed/",
+    "/brochure": "/brochure.pdf",
   },
 });

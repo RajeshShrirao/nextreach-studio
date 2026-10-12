@@ -67,7 +67,7 @@ const breadcrumbItems = (() => {
   for (const seg of segments) {
     current += "/" + seg;
     const label = seg.replace(/[-_]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    items.push({ name: label, path: current });
+    items.push({ name: label, path: `${current}/` });
   }
   return items;
 })();
@@ -133,7 +133,7 @@ const founder = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{siteTitle}</title>
     <meta name="description" content={siteDescription} />
-    <link rel="canonical" href={canonical} />
+    {!noIndex && <link rel="canonical" href={canonical} />}
 
     {localFonts ? (
       <>
@@ -250,7 +250,7 @@ const founder = {
     ))}
 
     <!-- Structured Data: BreadcrumbList -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": breadcrumbItems.map((item, i) => ({
@@ -266,7 +266,7 @@ const founder = {
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
 
     <!-- Structured Data: WebSite — references the Organization by @id -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
       "@id": WEBSITE_ID,
@@ -281,7 +281,7 @@ const founder = {
          addressLocality is Chakan: the studio is home-based, so the honest locality
          is the residential one. Google requires the site address to match whatever
          is set on the Business Profile — keep the two identical. -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
       "@id": ORG_ID,
@@ -328,11 +328,11 @@ const founder = {
 
     <!-- Structured Data: Person — founder entity, declared once site-wide so every
          Article below references it by @id instead of repeating a name string. -->
-    <script type="application/ld+json" set:html={JSON.stringify(founder)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(founder)} />
 
     <!-- Structured Data: Article (if article type) -->
     {type === "article" && pubDate && (
-      <script type="application/ld+json" set:html={JSON.stringify({
+      <script is:inline type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Article",
         "@id": `${canonical}#article`,
