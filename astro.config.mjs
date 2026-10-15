@@ -7,6 +7,9 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://www.nextreachstudio.in",
+  // Keep one URL for every page. Vercel otherwise serves both /path and /path/
+  // as 200 responses, which Google reports as alternate canonical pages.
+  trailingSlash: "always",
   vite: {
     plugins: [tailwindcss()],
   },
