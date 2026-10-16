@@ -47,3 +47,7 @@ lighthouse-report.json
 
 # Cloudflare
 .wrangler/
+
+# Local mem0 memory exports (repo rename migration, 2026-10-17).
+# Scratch data only — see .agents/ for anything worth keeping.
+.mem0-migration/
