@@ -17,7 +17,11 @@ import path from "node:path";
  */
 
 const CONTENT_DIR = path.resolve("src/content/blog");
-const BUILD_DIR = path.resolve("dist/client/blog");
+// With no adapter, astro build emits to dist/ directly. The dist/client/blog
+// probe is a legacy fallback for @astrojs/vercel, dropped on 2026-10-17.
+const BUILD_DIR = ["dist/blog", "dist/client/blog"]
+  .map((p) => path.resolve(p))
+  .find((p) => fs.existsSync(p)) ?? path.resolve("dist/blog");
 
 const unesc = (s) =>
   s

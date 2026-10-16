@@ -1,0 +1,10 @@
+# Cloudflare Pages response headers
+# Ported from vercel.json (2026-10-17). Vercel applied these at the edge;
+# Cloudflare Pages needs them declared here or they are silently absent.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload

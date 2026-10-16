@@ -4,7 +4,7 @@
 
 ```sh
 npm run dev        # Astro dev server
-npm run build      # Production build (static output via @astrojs/vercel) + Lighthouse audit gate
+npm run build      # Production build (static HTML for Cloudflare Pages) + Lighthouse audit gate
 npm run typecheck  # astro check
 npm run audit:lighthouse  # Re-run the Lighthouse gate alone (no rebuild)
 ```
@@ -24,13 +24,13 @@ Use `typecheck` for static verification and `build` as the real gate. Astro 6 re
 
 ## Architecture
 
-- **Astro 6** static site on Vercel. One layout (`Layout.astro`), one global stylesheet (`src/styles/globals.css`).
+- **Astro 6** fully static site on **Cloudflare Pages** (built from GitHub on push). One layout (`Layout.astro`), one global stylesheet (`src/styles/globals.css`). **No adapter** — a static Astro site needs none.
 - **Tailwind CSS v4** via `@tailwindcss/vite` plugin (NOT PostCSS, no `tailwind.config.js` — use CSS‑first config).
 - **React 19** for interactive components only (tools, homepage islands, brand and attribution viewers). Everything else is Astro.
 - **Path alias**: `@/*` → `./src/*`.
 - **Content collections**: `src/content/` with subdirectories `blog/`, `guides/`, `resources/`. Schemas defined in `src/content.config.ts` using `astro:content` `defineCollection` + `glob` loader.
 - **Dynamic routes**: `[...slug].astro` pattern with `getStaticPaths` fetching via `getCollection`.
-- **API route** (`/api/chat`): standalone serverless POST, `export const prerender = false`, requires `CEREBRAS_API_KEY` env var. Backend is Cerebras llama3.1-8b. The site currently has no chat UI mounted.
+- **No server routes.** The `/api/chat` Cerebras endpoint was deleted on 2026-10-17 — it had no client and was the only thing forcing a serverless adapter. The site builds to plain HTML with no Worker or Function.
 
 ## Content Collections
 
@@ -86,8 +86,9 @@ A `<slot />` sits between the offerings and the spec strip for page-specific con
 - **Content structure**: articles open with a direct answer (answer-first, for AI citation), include at least one comparison table, and end with a 4-6 question FAQ block. This is deliberate — it is what generative engines quote.
 - **Fonts**: Plus Jakarta Sans (body), Cabinet Grotesk (headings), JetBrains Mono (code) — loaded with `media="print" onload="this.media='all'"` (non‑render‑blocking).
 - **PWA**: the layout links `/manifest.json` and its icons. `/sw.js` is retained for existing clients; the site currently does not register it for new visitors.
+- **Redirects and headers**: `public/_redirects` and `public/_headers`, served natively by Cloudflare Pages. These were ported from `vercel.json` on 2026-10-17 — that file is gone and must not come back. Astro's own `redirects` config is deliberately **not** used: under a static build it emits meta-refresh HTML, which is not a 301. Note `/services/ecommerce` was defined only in the old `astro.config.mjs` block and never appeared in `vercel.json`; it lives in `_redirects` now.
 - **AI agent files**: `/llms.txt` (AI context primer), `/pricing-for-agents.md` (machine-readable pricing & services), `/robots.txt` (15 AI crawlers explicitly allowed).
-- **Environment**: Copy `.env.example` to `.env`. Only `CEREBRAS_API_KEY` needed.
+- **Environment**: none. No env vars, no secrets, no runtime.
 
 ## Project Structure
 
@@ -179,4 +180,6 @@ Then check the things `astro check` cannot catch:
 
 ## OpenCode Config
 
-Mem0 skills are registered in `.opencode/`. Always include `user_id="rajeshshrirao"` and `app_id="RajeshShrirao-nextreach-studio-bloom"` in mem0 search filters and add_memory calls. Use `mem0_search_memories` before starting non‑trivial tasks.
+Mem0 skills are registered in `.opencode/`. Always include `user_id="rajeshshrirao"` and `app_id="RajeshShrirao-nextreach-studio"` in mem0 search filters and add_memory calls. Use `mem0_search_memories` before starting non‑trivial tasks.
+
+The repo was renamed from `nextreach-studio-bloom` to `nextreach-studio` on 2026-10-17 (GitHub, local folder, `package.json`, `package-lock.json`). The 132 memories under the old `app_id="RajeshShrirao-nextreach-studio-bloom"` were exported to `.mem0-migration/mem0-export-RajeshShrirao-nextreach-studio-2026-10-17.json` and still need importing into the new `app_id` via `add_memory`. The old scope is intact on the server and can be dropped once the import is verified.

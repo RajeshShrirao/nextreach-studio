@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nextreach-studio",
+  "compatibility_date": "2026-10-17",
+  // The site is fully static — there is no Worker entrypoint and no Functions.
+  // Cloudflare serves the `astro build` output straight from the edge, and
+  // honors public/_redirects and public/_headers the same way Pages does.
+  //
+  // This replaced the @astrojs/vercel adapter on 2026-10-17. There is no
+  // `main` field on purpose; adding one would make wrangler look for a Worker
+  // script that does not exist.
+  "assets": {
+    "directory": "./dist"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

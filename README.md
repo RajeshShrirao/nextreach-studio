@@ -4,12 +4,11 @@ https://www.nextreachstudio.in — a founder-led software studio in Pune buildin
 
 ## Stack
 
-- Astro 6 with static output through `@astrojs/vercel`
+- Astro 6 with fully static output (no adapter — served by Cloudflare Pages)
 - React 19 islands for interactive tools and homepage interactions
 - Tailwind CSS v4 through `@tailwindcss/vite`
 - MDX content collections for blog posts, guides, and resources
-- Standalone Cerebras-backed chat API at `/api/chat` when `CEREBRAS_API_KEY` is configured (no on-site chat UI)
-- Vercel deployment
+- Cloudflare Pages deployment, built from GitHub on push
 
 ## Site structure
 
@@ -59,13 +58,23 @@ npm run verify:faq
 
 ## Environment
 
-Copy `.env.example` to `.env` and add the only required variable when enabling the chat endpoint:
+No environment variables are required. The site is fully static and has no server-side runtime.
 
-```text
-CEREBRAS_API_KEY=...
-```
+The unused Cerebras-backed `/api/chat` endpoint was removed on 2026-10-17 as part of the Cloudflare migration — it had no client, and it was the only thing forcing a serverless adapter. `CEREBRAS_API_KEY` is no longer read by anything in this repo.
 
 The public `widget.js` is a legacy embeddable client for a separate `/api/widget/*` backend; those routes are not implemented here. The manifest remains linked, but `sw.js` is not registered by the current site. Retire these public endpoints only after checking existing external clients.
+
+## Deployment
+
+Cloudflare Pages builds from GitHub on push:
+
+- Build command: `npm run build`
+- Output directory: `dist`
+- Node version: 22 or newer
+
+`npm run build` also runs the Lighthouse gate in `scripts/lighthouse_audit.py` and fails the build on any budget breach, so a Cloudflare build fails for the same reasons a Vercel build would.
+
+Redirects live in `public/_redirects` and security headers in `public/_headers` — Cloudflare Pages serves both natively. These were ported from `vercel.json` on 2026-10-17; do not re-add `vercel.json`, as it has no effect on Cloudflare and the two would drift.
 
 ## Content conventions
 

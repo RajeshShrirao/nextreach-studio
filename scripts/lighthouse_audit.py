@@ -600,7 +600,9 @@ def main() -> int:
 
     dist_dir = args.dist if os.path.isabs(args.dist) \
         else os.path.join(REPO_ROOT, args.dist)
-    # @astrojs/vercel emits the static site to dist/client/.
+    # With no adapter, astro build emits the static site straight to dist/,
+    # which is the primary case below. The dist/client/ probe is a legacy
+    # fallback for the @astrojs/vercel adapter, which was dropped on 2026-10-17.
     if not os.path.exists(os.path.join(dist_dir, "index.html")) \
             and os.path.exists(os.path.join(dist_dir, "client", "index.html")):
         dist_dir = os.path.join(dist_dir, "client")
