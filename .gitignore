@@ -44,3 +44,6 @@ lighthouse-report.json
 .vercel
 .env*
 .opencode/
+
+# Cloudflare
+.wrangler/
