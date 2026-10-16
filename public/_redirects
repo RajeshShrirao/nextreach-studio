@@ -1,0 +1,24 @@
+# Cloudflare Pages redirects
+# Ported from vercel.json + astro.config.mjs `redirects` (2026-10-17).
+# Cloudflare Pages does real 301s here, matching what @astrojs/vercel produced.
+# The `redirects` block was removed from astro.config.mjs so there is one source of truth.
+#
+# Syntax: <source> <destination> <status>
+# Evaluated top to bottom, first match wins.
+
+# Was defined only in astro.config.mjs — not present in vercel.json. Do not drop.
+/services/ecommerce /services/ecommerce-website-development-pune/ 301
+
+/sitemap.xml /sitemap-index.xml 301
+/attribution/embed /attribution/embed/ 301
+/attribution/embed.html /attribution/embed/ 301
+
+/brochure /brochure.pdf 301
+/brochure/ /brochure.pdf 301
+
+/assets/demo-clinic.jpg /assets/demos/business-clinic.jpg 301
+/assets/demo-villa.jpg /assets/demos/premium-vayu.jpg 301
+/assets/demos/quick-launch.jpg /assets/demo-profile.jpg 301
+/NextReach-Studio-Brochure.pdf /brochure.pdf 301
+/social-ad-banner.jpg /social-media-packages.jpg 301
+/logo-mark.svg /logo.svg 301
