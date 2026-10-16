@@ -6,17 +6,9 @@ import LogoMarquee from "@/components/brand/LogoMarquee.astro";
 import StudioSpecInteractive from "@/components/home/StudioSpecInteractive";
 import StudioIndustryInteractive from "@/components/home/StudioIndustryInteractive";
 import StudioReviews from "@/components/home/StudioReviews";
-import { ArrowUpRightIcon as ArrowUpRight, ArrowRightIcon as ArrowRight, ArrowDownIcon as ArrowDown, PlusIcon as Plus, CheckIcon as Check, CodeIcon as Code, SparkleIcon as Sparkle, GlobeIcon as Globe } from "@phosphor-icons/react";
-import { getImage } from "astro:assets";
-import diningPhoto from "../../public/assets/demos/saffron-and-smoke/hero-dish.jpg";
-import clinicPhoto from "../../public/assets/demos/business-clinic.jpg";
+import { ArrowUpRightIcon as ArrowUpRight, ArrowRightIcon as ArrowRight, PlusIcon as Plus, CheckIcon as Check, CodeIcon as Code, SparkleIcon as Sparkle, GlobeIcon as Globe, SunIcon as Sun } from "@phosphor-icons/react";
 import { getCollection } from "astro:content";
 import { buildWhatsAppUrl, websitePackages } from "@/data/websitePackages";
-
-const [diningImage, clinicImage] = await Promise.all([
-  getImage({ src: diningPhoto, width: 1200, format: "webp" }),
-  getImage({ src: clinicPhoto, width: 1000, format: "webp" }),
-]);
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()).slice(0, 3);
@@ -37,26 +29,26 @@ const proofPoints = [
   { value: "Pune", label: "Studio base · clients across India and abroad" },
 ];
 
-const audience = ["Local businesses", "Professional services", "Startups", "Growing companies"];
+const audience = ["Residential rooftop installers", "Home solar specialists", "Teams serving multiple areas", "Growing solar businesses"];
 
 // The three failure modes every website is judged on, and the beats the rest of the page
 // answers. Order is deliberate: found, then trusted, then contacted.
 const problems = [
-  { title: "Nobody finds you", text: "Not in the map pack, not in AI answers, not on page one — so the people already searching for what you sell never arrive." },
-  { title: "Nobody trusts you at a glance", text: "Slow, dated, or unclearly worded. The judgement lands in the first few seconds, long before anyone reads a sentence." },
-  { title: "Nobody contacts you", text: "No obvious next step, so the visit ends in a back-button instead of an enquiry in your inbox." },
+  { title: "Your service area is hard to understand", text: "Homeowners need to know where you install and what residential solar work you take on." },
+  { title: "Your real work is hard to see", text: "Installation photos, project details and your team’s process can help explain the work behind the quote." },
+  { title: "The next step is easy to miss", text: "A clear WhatsApp or quote request path gives interested homeowners a direct way to ask you a question." },
 ];
 
 const services = [
-  { name: "Websites with presence.", description: "Distinctive digital experiences that turn first impressions into real inquiries.", tags: "Strategy / Design / Development", icon: Globe, href: "/services/" },
-  { name: "Products with purpose.", description: "From your first MVP to the platform your business runs on. Built for real people.", tags: "Web apps / SaaS / MVPs", icon: Code, href: "/services/web-application-development-pune/" },
-  { name: "Less busywork. More possibility.", description: "AI agents and connected workflows that give your team its time back.", tags: "AI agents / Automation / APIs", icon: Sparkle, href: "/services/ai-automation-pune/" },
+  { name: "Explain your solar service.", description: "Bring services, locations and homeowner questions into one clear website.", tags: "Residential / Rooftop / Solar", icon: Sun, href: "/solar-installers/" },
+  { name: "Show your real installation work.", description: "Give your own project photos and details a considered place in the story.", tags: "Projects / Service areas / FAQs", icon: Globe, href: "/solar-installers/#concept-caption" },
+  { name: "Make the next step simple.", description: "Add a direct route to WhatsApp or a quote request, with the right context to begin.", tags: "Enquiries / WhatsApp / Follow-up", icon: Sparkle, href: "/solar-installers/#solar-brief" },
 ];
 
 const processSteps = [
-  { name: "Find the focus", text: "We talk about your goals, your audience, and what a great result looks like." },
+  { name: "Find the focus", text: "We talk through your residential solar services, locations and what homeowners need to know." },
   { name: "Make it real", text: "We agree the scope and price, then design and build with live previews." },
-  { name: "Launch", text: "We check the details, go live, and watch the first week's enquiries with you." },
+  { name: "Launch", text: "We check the mobile experience, service details and enquiry route, then prepare the site to go live." },
   { name: "You own it", text: "Source code, design assets and deployment, handed over in your name. No hostage retainers." },
 ];
 
@@ -67,8 +59,9 @@ const ownership = [
 ];
 
 const faqs = [
+  { question: "Do you have website packages for solar installers?", answer: "Yes. Residential rooftop solar installers can choose from three dedicated scopes: Solar Business Website at ₹15,000, Solar Enquiry Website at ₹25,000, and Solar Conversion System at ₹35,000. See the scope comparison on our solar installer page." },
   { question: "Can a custom website really launch in three days?", answer: "Yes, for our fixed-scope website packages. Delivery starts once your content, assets, and scope are approved. Custom applications and AI systems have their own agreed project timeline." },
-  { question: "What does a website actually cost?", answer: "Fixed-scope websites are ₹5,000, ₹7,500 and ₹10,000 — one-time, with the price agreed before we start. Web apps and AI systems are quoted after a scoping call, because an honest number there depends on what you need built." },
+  { question: "What does a website actually cost?", answer: "For residential rooftop solar installers, dedicated packages are ₹15,000, ₹25,000 and ₹35,000. Our general fixed-scope website packages are ₹5,000, ₹7,500 and ₹10,000. Each has its own scope, agreed before work starts." },
   { question: "Do I own the finished website?", answer: "Yes. You receive the source code, design assets, and deployment handover. Your domain and project belong to you." },
   { question: "Do you only work with businesses in Pune?", answer: "No. The studio is based in Pune and most clients are across India, but we have delivered for founders and businesses abroad too. Everything runs on calls and shared previews, so distance has never been the constraint." },
   { question: "Will my website show up on Google?", answer: "Every build ships with clean semantic markup, structured data, fast Core Web Vitals and a sitemap — the technical groundwork that makes ranking possible. Ranking itself depends on your content and your competition, so we will tell you what is realistic rather than promise a position." },
@@ -78,7 +71,7 @@ const faqs = [
 ];
 ---
 
-<Layout localFonts skipLoader title="Websites That Pay Off, Built in Pune" description="Fixed-scope websites from ₹5,000, plus web apps and AI systems. Built in Pune by the senior engineer you actually talk to. See the work and the real prices.">
+<Layout localFonts skipLoader title="Websites for Solar Installers" description="Websites for residential rooftop solar installers. Explain your services, show your real installation work and give homeowners a clear route to ask for a quote.">
   <div class="studio-home" data-studio-home>
     <a class="studio-skip" href="#main-content">Skip to content</a>
     <StudioNav client:idle />
@@ -102,21 +95,21 @@ const faqs = [
         <StudioGlassGalaxy client:idle />
         <div class="studio-hero-inner studio-hero-galaxy-inner">
           <div class="studio-hero-copy studio-hero-galaxy-copy">
-            <h1 id="hero-title" class="studio-hero-enter"><span>Reach</span><span class="studio-hero-next">what’s next.</span></h1>
-            <p class="studio-hero-description studio-hero-enter">Websites, AI &amp; digital products built to move your business forward.</p>
+            <h1 id="hero-title" class="studio-hero-enter"><span>Solar websites,</span><span class="studio-hero-next">built around the enquiry.</span></h1>
+            <p class="studio-hero-description studio-hero-enter">For residential rooftop installers. Explain your services, show your real installation work and give homeowners a clear route to ask about a quote.</p>
             <div class="studio-hero-actions studio-hero-enter">
-              <a href="/contact/" class="studio-button" data-magnetic data-track="home_hero_start_project">Start a project <ArrowUpRight size={19} weight="bold" aria-hidden="true" /></a>
-              <a href="#live-demo" class="studio-text-link" data-magnetic data-track="home_hero_see_work">See our work <ArrowDown size={18} aria-hidden="true" /></a>
+              <a href="/solar-installers/" class="studio-button" data-magnetic data-track="home_hero_solar_packages">See solar packages <ArrowUpRight size={19} weight="bold" aria-hidden="true" /></a>
+              <a href="/solar-installers/#concept-caption" class="studio-text-link" data-magnetic data-track="home_hero_solar_concept">View the concept <ArrowUpRight size={18} aria-hidden="true" /></a>
             </div>
-            <ul class="studio-hero-index studio-hero-enter" aria-label="What we build">
-              <li>Websites</li>
-              <li>AI agents</li>
-              <li>Apps</li>
-              <li>Automations</li>
+            <ul class="studio-hero-index studio-hero-enter" aria-label="Solar website essentials">
+              <li>Residential rooftop</li>
+              <li>Service areas</li>
+              <li>Real projects</li>
+              <li>Quote requests</li>
             </ul>
           </div>
           <div class="studio-hero-foot studio-hero-enter" aria-hidden="true">
-            <span>Pune — working worldwide</span>
+            <span>NextReach Studio · Solar installer websites</span>
             <span class="studio-hero-scroll">Scroll ↓</span>
           </div>
         </div>
@@ -129,7 +122,7 @@ const faqs = [
       <LogoMarquee variant="studio" />
 
       <section class="studio-audience studio-container studio-section" aria-labelledby="audience-title">
-        <h2 id="audience-title" data-reveal>For businesses that need <span>more than a brochure website.</span></h2>
+        <h2 id="audience-title" data-reveal>For residential rooftop installers who need <span>a clearer home online.</span></h2>
         <div class="studio-audience-list" data-reveal>
           {audience.map((item, i) => <div class="studio-audience-item"><span>{`0${i + 1}`}</span>{item}</div>)}
         </div>
@@ -138,7 +131,7 @@ const faqs = [
       <section class="studio-problem" aria-labelledby="problem-title">
         <div class="studio-container">
           <div class="studio-problem-head">
-            <h2 id="problem-title" data-reveal>Your website shouldn’t<br />just exist.</h2>
+            <h2 id="problem-title" data-reveal>A solar website should<br />answer the first questions.</h2>
           </div>
           <div class="studio-problem-list">
             {problems.map((problem, i) => <div class="studio-problem-row" data-reveal>
@@ -146,13 +139,13 @@ const faqs = [
               <div><h3>{problem.title}</h3><p>{problem.text}</p></div>
             </div>)}
           </div>
-          <p class="studio-problem-turn" data-reveal>Ours are built to <em>do all three.</em></p>
+          <p class="studio-problem-turn" data-reveal>Make the service clear. Show the work. <em>Give people a next step.</em></p>
         </div>
       </section>
 
       <section class="studio-services studio-container studio-section" id="services" aria-labelledby="services-title">
-        <h2 id="services-title" data-reveal>One studio.<br /><span class="studio-muted">Three ways to work together.</span></h2>
-        <p class="studio-services-intro" data-reveal>A website is one system with three jobs: be found, earn trust in the first few seconds, and make getting in touch the obvious next step. Web apps and AI workflows are how that system reaches into the rest of your business.</p>
+        <h2 id="services-title" data-reveal>One clear solar website.<br /><span class="studio-muted">Built around your next step.</span></h2>
+        <p class="studio-services-intro" data-reveal>A focused website can explain your services and areas, give your real installation work room to speak, and make it straightforward for homeowners to ask a question.</p>
         <div class="studio-service-list">
           {services.map((service, i) => <a href={service.href} class="studio-service" data-reveal>
             <span class="studio-service-index">0{i + 1}</span>
@@ -167,24 +160,21 @@ const faqs = [
 
       <section class="studio-work studio-container studio-section" id="live-demo" aria-labelledby="work-title">
         <div class="studio-section-title" data-reveal>
-          <h2 id="work-title">Selected work.<br /><span class="studio-muted">Built to be used.</span></h2>
-          <a href="/portfolio/" class="studio-text-link">Explore our work <ArrowUpRight size={20} /></a>
+          <h2 id="work-title">A solar website direction.<br /><span class="studio-muted">Illustrative concept.</span></h2>
+          <a href="/solar-installers/" class="studio-text-link">Explore solar packages <ArrowUpRight size={20} /></a>
         </div>
-        <div class="studio-projects">
+        <div class="studio-projects studio-projects-solar">
           <article class="studio-project studio-project-featured" data-reveal>
-            <a class="studio-project-image studio-dining-image" href="/demos/saffron-and-smoke/" aria-label="Explore Saffron and Smoke restaurant website demo">
-              <img src={diningImage.src} alt="The signature dish from the Saffron and Smoke fine-dining website demo" width="1200" height="670" loading="lazy" decoding="async" />
-              <div class="studio-project-wordmark" aria-hidden="true">Saffron<br /><span>&amp; Smoke</span></div>
+            <a class="studio-project-image studio-solar-concept" href="/solar-installers/#concept-caption" aria-label="View the illustrative residential solar installer website concept">
+              <div class="studio-solar-mock">
+                <img class="studio-solar-mock-image" src="/images/solar/installation-concept.webp" alt="Illustrative solar installer inspecting rooftop panels; generated concept image, not a client installation" width="1100" height="825" loading="lazy" decoding="async" />
+                <div class="studio-solar-mock-nav"><span>YOUR SOLAR BUSINESS</span><span>Services&nbsp;&nbsp; Projects&nbsp;&nbsp; Contact</span></div>
+                <div class="studio-solar-mock-body"><span class="studio-solar-mock-kicker">RESIDENTIAL ROOFTOP SOLAR</span><strong class="studio-solar-mock-title">Clear service information.<br />A simple next step.</strong><span class="studio-solar-mock-copy">Your service area. Your real projects. A straightforward way to ask about a quote.</span><span class="studio-solar-mock-cta">Request a quote <ArrowUpRight size={16} /></span></div>
+                <span class="studio-solar-mock-foot">WEBSITE CONCEPT STUDY&nbsp; / &nbsp;NOT CLIENT WORK</span>
+              </div>
               <span class="studio-project-open" aria-hidden="true"><ArrowUpRight size={26} /></span>
             </a>
-            <div class="studio-project-info"><div><h3>Saffron &amp; Smoke</h3><p>A dining experience, reimagined online.</p></div><span>Hospitality · Flagship demo</span></div>
-          </article>
-          <article class="studio-project studio-project-secondary" data-reveal>
-              <a class="studio-project-image studio-clinic-image" href="/portfolio/" aria-label="Explore Oak and Elm clinic website demo">
-              <img src={clinicImage.src} alt="Warm, light-filled Oak and Elm clinic interior featured in our business website demo" width="1000" height="558" loading="lazy" decoding="async" />
-              <span class="studio-project-open" aria-hidden="true"><ArrowUpRight size={26} /></span>
-            </a>
-            <div class="studio-project-info"><div><h3>Oak &amp; Elm</h3><p>Care starts with a better first impression.</p></div><span>Healthcare · Business demo</span></div>
+            <div class="studio-project-info"><div><h3>Residential solar installer website</h3><p>A concept for explaining the service and making enquiries easy to start.</p></div><span>Concept study · Not a client project</span></div>
           </article>
         </div>
       </section>
@@ -206,7 +196,12 @@ const faqs = [
       </section>
 
       <section class="studio-pricing studio-container studio-section" id="packages" aria-labelledby="packages-title">
-        <div class="studio-section-title" data-reveal><h2 id="packages-title">Serious craft.<br /><span class="studio-muted">Sensible starting points.</span></h2><span class="studio-pricing-note">Fixed-scope websites.<br />One-time pricing. Full ownership.</span></div>
+        <div class="studio-solar-offer" data-reveal>
+          <div><span class="studio-solar-offer-kicker">For residential rooftop solar installers</span><h3>Specialist scopes from ₹15,000.</h3><p>The ₹25,000 Solar Enquiry Website is the featured package, with a focused page structure, quote request path and solar-specific content scope.</p></div>
+          <div class="studio-solar-offer-price"><strong>₹15k / ₹25k / ₹35k</strong><span>Three one-time packages</span></div>
+          <a href="/solar-installers/" class="studio-button" data-track="home_solar_package_comparison">Compare solar packages <ArrowUpRight size={18} /></a>
+        </div>
+        <div class="studio-section-title" data-reveal><h2 id="packages-title">General website packages.<br /><span class="studio-muted">Sensible starting points.</span></h2><span class="studio-pricing-note">For general website briefs.<br />One-time pricing. Full ownership.</span></div>
         <div class="studio-package-grid">
           {packages.map((pkg, i) => <article class={`studio-package ${i === 2 ? "studio-package-featured" : ""}`} data-reveal>
             <div class="studio-package-top"><span>{i === 2 ? "The signature experience" : "Made for your next step"}</span><ArrowUpRight size={22} /></div>
@@ -218,7 +213,6 @@ const faqs = [
           </article>)}
         </div>
         <p class="studio-custom-note">Comparing the three? <a href="/fast-websites/">See full package details <ArrowUpRight size={17} /></a></p>
-         <p class="studio-custom-note">Something more ambitious? <a href="/contact/">Let’s scope your web app or AI system <ArrowUpRight size={17} /></a></p>
       </section>
 
       <StudioReviews client:visible />
@@ -252,11 +246,11 @@ const faqs = [
       </section>}
 
       <section class="studio-contact studio-container studio-section" aria-labelledby="contact-title">
-         <div class="studio-contact-main" data-reveal><h2 id="contact-title">Build what’s<br /><span>next.</span></h2><a href="/fast-websites/" class="studio-contact-button" aria-label="Start a fast website project" data-track="home_contact_orb"><ArrowUpRight size={64} weight="light" /></a></div>
-         <div class="studio-contact-bottom"><p>Bring the idea.<br />We’ll bring the craft.</p>
+         <div class="studio-contact-main" data-reveal><h2 id="contact-title">A clearer home<br /><span>for solar.</span></h2><a href="/solar-installers/" class="studio-contact-button" aria-label="Explore solar installer website packages" data-track="home_contact_orb"><ArrowUpRight size={64} weight="light" /></a></div>
+         <div class="studio-contact-bottom"><p>Bring your service details.<br />We’ll bring the craft.</p>
           <div class="studio-contact-actions">
-            <a href="/fast-websites/" class="studio-button" data-track="home_footer_fast_websites">Ready for a website <ArrowUpRight size={19} /></a>
-            <a href="/contact/" class="studio-text-link" data-track="home_footer_custom_scope">Need a web app or AI system? <ArrowRight size={19} /></a>
+            <a href="/solar-installers/" class="studio-button" data-track="home_footer_solar_packages">Explore solar packages <ArrowUpRight size={19} /></a>
+            <a href="/fast-websites/" class="studio-text-link" data-track="home_footer_general_packages">Looking for a general website? <ArrowRight size={19} /></a>
           </div>
         </div>
       </section>
@@ -264,7 +258,7 @@ const faqs = [
 
     <footer class="studio-footer studio-container">
       <a href="/" class="studio-footer-brand"><img src="/brand/logo-mark.png" width="28" height="35" alt="" />NextReach <span>Studio</span></a>
-      <div class="studio-footer-links"><a href="/services/">Services</a><a href="/industries/restaurants/">Industries</a><a href="/blog/">Blog</a><a href="/guides/">Guides</a><a href="/resources/">Resources</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+      <div class="studio-footer-links"><a href="/services/">Services</a><a href="/solar-installers/">Solar Installers</a><a href="/blog/">Blog</a><a href="/guides/">Guides</a><a href="/resources/">Resources</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
       <div class="studio-footer-bottom"><span>© {new Date().getFullYear()} NextReach Studio</span><span>Thoughtfully designed. Carefully engineered.</span></div>
     </footer>
   </div>

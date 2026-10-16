@@ -13,15 +13,7 @@ const serviceLinks = [
 ];
 
 const industryLinks = [
-  { href: "/industries/manufacturing/", label: "Manufacturing" },
-  { href: "/industries/logistics/", label: "Logistics" },
-  { href: "/industries/education/", label: "Education" },
-  { href: "/industries/real-estate/", label: "Real Estate" },
-  { href: "/industries/healthcare/", label: "Healthcare" },
-  { href: "/industries/retail/", label: "Retail" },
-  { href: "/industries/restaurants/", label: "Restaurants" },
-  { href: "/industries/construction/", label: "Construction" },
-  { href: "/industries/pet-grooming/", label: "Pet Grooming" },
+  { href: "/solar-installers/", label: "Solar Installers" },
 ];
 
 const navLinks = [
@@ -110,7 +102,7 @@ const isIndustriesActive = industryLinks.some(
         </div>
       </li>
 
-      <!-- Industries Dropdown -->
+      <!-- Solar Installers Link -->
       <li class="relative group" data-dd data-open="false">
         <button
           type="button"
@@ -123,7 +115,7 @@ const isIndustriesActive = industryLinks.some(
           aria-expanded="false"
           aria-haspopup="true"
         >
-          <span>Industries</span>
+          <span>Solar Installers</span>
           <svg data-dd-chevron class="w-3.5 h-3.5 transition-transform duration-200 text-[#6E6862] group-hover:text-[#1F1F23] group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
           </svg>
@@ -319,7 +311,7 @@ const isIndustriesActive = industryLinks.some(
         </div>
       </li>
 
-      <!-- Mobile Industries Header -->
+      <!-- Mobile Solar Installers Header -->
       <li class="space-y-1">
         <button
           type="button"
@@ -330,8 +322,7 @@ const isIndustriesActive = industryLinks.some(
           aria-expanded={isIndustriesActive ? "true" : "false"}
         >
           <span class="flex items-center gap-2">
-            <span>Industries</span>
-            <span class="px-1.5 py-0.5 text-[10px] font-mono font-medium rounded-md bg-[#C76B50]/10 text-[#C76B50] border border-[#C76B50]/20">9</span>
+            <span>Solar Installers</span>
           </span>
           <svg
             data-mobile-chevron="industries"

@@ -2,135 +2,14 @@
 
 import { useRef } from "react";
 import { motion, useMotionTemplate, useMotionValue } from "motion/react";
-import {
-  FactoryIcon,
-  TruckIcon,
-  GraduationCapIcon,
-  BuildingsIcon,
-  FirstAidKitIcon,
-  ShoppingBagIcon,
-  ForkKnifeIcon,
-  HardHatIcon,
-  RocketLaunchIcon,
-  DogIcon,
-  ArrowUpRightIcon,
-} from "@phosphor-icons/react";
-
-// Order and slugs mirror /industries so the two grids read as the same list. All ten
-// industry pages exist; keeping them all here matters because the homepage is the
-// strongest internal-link source on the site and an unlinked page will not rank.
-//
-// The `kpi` line is a description of what gets built, not a result we are claiming.
-// Do not put a measured-sounding figure here — nothing on these cards has been measured.
-const verticals = [
-  {
-    index: "01",
-    sector: "Manufacturing",
-    outcome: "Shop floor and office, on one system",
-    description: "Production tracking, inventory and auto-reorder thresholds, digital inspection forms, and an order-to-delivery pipeline built around your actual workflows.",
-    href: "/industries/manufacturing/",
-    icon: FactoryIcon,
-    tag: "Production & ERP",
-    kpi: "Custom, not a template",
-  },
-  {
-    index: "02",
-    sector: "Logistics & Supply Chain",
-    outcome: "Live dispatch and client portals",
-    description: "Fleet interfaces, shipment tracking pipelines, and billing automation dashboards that replace the spreadsheet-and-phone-call workflow.",
-    href: "/industries/logistics/",
-    icon: TruckIcon,
-    tag: "Freight & Fleets",
-    kpi: "Automated dispatch",
-  },
-  {
-    index: "03",
-    sector: "Education & EdTech",
-    outcome: "Portals for staff, students and parents",
-    description: "Attendance, grades and fees in one place, plus admission platforms with document upload and automated merit lists.",
-    href: "/industries/education/",
-    icon: GraduationCapIcon,
-    tag: "Schools & EdTech",
-    kpi: "Admissions online",
-  },
-  {
-    index: "04",
-    sector: "Real Estate & Architecture",
-    outcome: "High-ticket portfolio showcases",
-    description: "Ultra-crisp property tours that stay sharp on a phone, lead qualification funnels, and automated broker routing.",
-    href: "/industries/real-estate/",
-    icon: BuildingsIcon,
-    tag: "Estates & Architecture",
-    kpi: "Sharp on every screen",
-  },
-  {
-    index: "05",
-    sector: "Healthcare & Aesthetics",
-    outcome: "Booking without the phone call",
-    description: "Practitioner profiles, appointment scheduling, and intake forms that respect patient privacy — for clinics, dentists and practitioners.",
-    href: "/industries/healthcare/",
-    icon: FirstAidKitIcon,
-    tag: "Medical & Dental",
-    kpi: "Booking flows that finish",
-  },
-  {
-    index: "06",
-    sector: "Retail & D2C Brands",
-    outcome: "Catalog to checkout, without friction",
-    description: "Catalog showcases, WhatsApp commerce, and conversion-focused checkouts that stay fast as the product list grows.",
-    href: "/industries/retail/",
-    icon: ShoppingBagIcon,
-    tag: "Commerce & D2C",
-    kpi: "Built to sell",
-  },
-  {
-    index: "07",
-    sector: "Restaurants & Hospitality",
-    outcome: "A menu that opens instantly",
-    description: "Culinary storytelling, menus that load on congested mobile networks, and reservation flows that hand off to WhatsApp.",
-    href: "/industries/restaurants/",
-    icon: ForkKnifeIcon,
-    tag: "Dining & Cafes",
-    kpi: "Mobile-first menus",
-  },
-  {
-    index: "08",
-    sector: "Construction & Contracting",
-    outcome: "Project tracking that works on-site",
-    description: "Milestone and budget visibility, material and procurement tracking, workforce attendance, and client portals with site photo updates.",
-    href: "/industries/construction/",
-    icon: HardHatIcon,
-    tag: "Builders & Contractors",
-    kpi: "Built for site conditions",
-  },
-  {
-    index: "09",
-    sector: "Tech Startups & SaaS",
-    outcome: "Investor-grade pages and MVPs",
-    description: "Fast landing pages for paid ad traffic, interactive product walkthroughs, and scalable full-stack applications.",
-    href: "/industries/saas-tech-startups-pune/",
-    icon: RocketLaunchIcon,
-    tag: "Software & AI",
-    kpi: "Ad traffic ready",
-  },
-  {
-    index: "10",
-    sector: "Pet Grooming & Veterinary",
-    outcome: "Bookings, reminders and pet records",
-    description: "Online booking with automated reminders, pet profiles carrying medical history and grooming notes, and WhatsApp follow-ups.",
-    href: "/industries/pet-grooming/",
-    icon: DogIcon,
-    tag: "Pet Care & Vets",
-    kpi: "Fewer no-shows",
-  },
-];
+import { ArrowUpRightIcon, SunIcon } from "@phosphor-icons/react";
 
 export default function StudioIndustryInteractive() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent<HTMLElement>) {
     const { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
@@ -149,59 +28,46 @@ export default function StudioIndustryInteractive() {
       <div className="studio-section-title">
         <div>
           <h2 id="industries-title">
-            Built for your industry.<br />
-            <span className="studio-muted">Engineered for your goals.</span>
+            One focused audience.<br />
+            <span className="studio-muted">Residential rooftop solar.</span>
           </h2>
         </div>
-        <a href="/industries/" className="studio-text-link">
-          Explore all 10 sectors <ArrowUpRightIcon size={20} />
+        <a href="/solar-installers/" className="studio-text-link">
+          Explore solar packages <ArrowUpRightIcon size={20} />
         </a>
       </div>
 
-      <div className="studio-industry-interactive-grid">
-        {/* Cursor Spotlight Layer */}
+      <div className="studio-industry-interactive-grid studio-solar-industry-grid">
         <motion.div
           className="studio-spotlight-layer"
           style={{ background: spotlightBg }}
           aria-hidden="true"
         />
-
-        {verticals.map((item) => {
-          const Icon = item.icon;
-          return (
-            <motion.a
-              key={item.index}
-              href={item.href}
-              className="studio-industry-interactive-card group"
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-            >
-              <div className="studio-industry-top">
-                <span className="studio-industry-index">{item.index}</span>
-                <span className="studio-industry-tag">{item.tag}</span>
-                <Icon size={26} weight="light" className="studio-industry-icon" />
-              </div>
-
-              <div className="studio-industry-content">
-                <h3>{item.sector}</h3>
-                <p className="studio-industry-outcome">{item.outcome}</p>
-                <p className="studio-industry-desc">{item.description}</p>
-              </div>
-
-              <div className="studio-industry-kpi-badge">
-                <span className="studio-live-dot" />
-                <span>{item.kpi}</span>
-              </div>
-
-              <div className="studio-industry-footer">
-                <span>View industry playbook</span>
-                <span className="studio-industry-arrow" aria-hidden="true">
-                  <ArrowUpRightIcon size={18} />
-                </span>
-              </div>
-            </motion.a>
-          );
-        })}
+        <motion.a
+          href="/solar-installers/"
+          className="studio-industry-interactive-card group"
+          whileHover={{ y: -4 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+        >
+          <div className="studio-industry-top">
+            <span className="studio-industry-index">01</span>
+            <span className="studio-industry-tag">Solar installers</span>
+            <SunIcon size={26} weight="light" className="studio-industry-icon" />
+          </div>
+          <div className="studio-industry-content">
+            <h3>Websites for residential rooftop installers</h3>
+            <p className="studio-industry-outcome">A clear home for your services, projects and quote requests.</p>
+            <p className="studio-industry-desc">Explain where you work, show your own installation projects and give homeowners a straightforward way to get in touch.</p>
+          </div>
+          <div className="studio-industry-kpi-badge">
+            <span className="studio-live-dot" />
+            <span>Three dedicated package scopes</span>
+          </div>
+          <div className="studio-industry-footer">
+            <span>View solar website packages</span>
+            <span className="studio-industry-arrow" aria-hidden="true"><ArrowUpRightIcon size={18} /></span>
+          </div>
+        </motion.a>
       </div>
     </section>
   );

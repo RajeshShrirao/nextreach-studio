@@ -1,0 +1,219 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import StudioNav from "@/components/home/StudioNav";
+import { CONTACT } from "@/layouts/Layout.astro";
+
+const packages = [
+  {
+    name: "Solar Business Website",
+    price: "₹15,000",
+    fit: "A clear first home online",
+    features: ["Up to 3 focused pages", "Services, service area and contact details", "Mobile-first layout", "Click-to-call and WhatsApp links", "Page titles and basic search setup", "Source and asset handover"],
+  },
+  {
+    name: "Solar Enquiry Website",
+    price: "₹25,000",
+    fit: "For installers ready to explain and capture enquiries",
+    featured: true,
+    features: ["Up to 5 focused pages", "Residential rooftop solutions and service areas", "Project gallery for your own completed work", "Quote request form with WhatsApp handoff", "FAQ and clear next steps", "Mobile-first layout and technical SEO foundations", "Named CTA events ready for analytics", "Source and asset handover"],
+  },
+  {
+    name: "Solar Conversion System",
+    price: "₹35,000",
+    fit: "A richer campaign-ready enquiry journey",
+    features: ["Up to 7 focused pages or sections", "Campaign landing page structure", "Guided enquiry qualification flow", "Project gallery and service-area content", "WhatsApp handoff with enquiry context", "Technical SEO foundations and CTA event setup", "Analytics connection when account access is provided", "Source and asset handover"],
+  },
+];
+
+const faqs = [
+  { q: "Why does the solar package cost more than the general website packages?", a: "The general packages are broad fixed-scope starting points. These solar scopes include residential rooftop solar content structure, enquiry paths, and space for your service areas and real project work. The exact scope is agreed before work begins." },
+  { q: "Do you provide a free demo website?", a: "No. We agree the package and scope first, then begin the project after the advance payment." },
+  { q: "How do payments work?", a: "A 50% advance books the project and starts the work. The remaining 50% is due before the website goes live and the final handover is completed." },
+  { q: "Are domain, hosting, ad spend, or paid tools included?", a: "No. Third-party charges such as domain renewal, hosting, paid tools, and advertising spend are separate and remain in your account." },
+  { q: "Will the website guarantee leads, savings, or a Google ranking?", a: "No. A website can explain your offer and make it easier for visitors to enquire. Enquiry volume, solar savings, and search positions depend on factors outside a website build and are not guaranteed." },
+  { q: "What do you need from me to start?", a: "Your business name, service locations, services offered, contact details, and any real installation photos or project information you want included. We will confirm the final content checklist with the agreed scope." },
+  { q: "Can I add marketing or follow-up services later?", a: "Yes. Once the website is in place, we can discuss local visibility, enquiry-flow improvements, and lead acquisition as separate scopes. Ad budgets and ongoing work are not included in these website prices." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+};
+
+const firstMessage = encodeURIComponent("Hi NextReach Studio, I’m a residential rooftop solar installer and would like to discuss a website. My business name is:");
+const whatsappUrl = `https://wa.me/${CONTACT.phone.replace(/\D/g, "")}?text=${firstMessage}`;
+---
+
+<Layout
+  localFonts
+  skipLoader
+  title="Websites for Residential Solar Installers"
+  description="Three fixed-scope website options for residential rooftop solar installers: ₹15,000, ₹25,000 and ₹35,000. Mobile-first design, clearer service information and WhatsApp enquiry paths."
+>
+  <div class="studio-home solar-site-shell" data-studio-home>
+  <a class="studio-skip" href="#solar-content">Skip to content</a>
+  <StudioNav client:idle />
+  <main class="solar-page" id="main-content">
+    <section class="solar-hero" id="solar-content" aria-labelledby="solar-title">
+      <div class="solar-wrap solar-hero-grid">
+        <div class="solar-hero-copy">
+          <p class="solar-eyebrow"><span></span> Websites for residential rooftop solar installers</p>
+          <h1 id="solar-title">Solar websites,<span>built around the enquiry.</span></h1>
+          <p class="solar-lede">For residential rooftop installers. Explain your services, show your real installation work and give homeowners a clear route to ask about a quote.</p>
+          <div class="solar-actions">
+            <a class="solar-button solar-button-whatsapp" href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-track="solar_hero_whatsapp" data-whatsapp-cta>Discuss your solar website <span aria-hidden="true">↗</span></a>
+            <a class="solar-secondary-link" href="#solar-packages" data-track="solar_hero_packages">Compare the packages <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="solar-note">Fixed scope · 50% advance to begin · No free demo site</p>
+        </div>
+
+        <figure class="solar-concept" aria-labelledby="concept-caption">
+          <div class="concept-topline"><span>WEB PRESENCE / CONCEPT STUDY</span><span>01—02</span></div>
+          <div class="concept-panels">
+            <div class="concept-panel concept-before">
+              <div class="concept-label"><span>01</span> Layout sketch</div>
+              <div class="concept-browser"><span></span><span></span><span></span><b>YOUR SOLAR BUSINESS</b></div>
+              <div class="concept-before-content">
+                <div class="mock-roof"><i></i><i></i><i></i><i></i></div>
+                <small>ROOFTOP SOLAR SERVICES</small>
+                <strong>Solar services<br />for your home</strong>
+                <div class="mock-line"></div><div class="mock-line short"></div>
+                <span class="mock-button">Contact</span>
+              </div>
+              <p>A basic layout can make details and next steps harder to scan.</p>
+            </div>
+            <div class="concept-panel concept-after">
+              <div class="concept-label"><span>02</span> Design direction</div>
+              <div class="concept-browser"><span></span><span></span><span></span><b>YOUR SOLAR BUSINESS</b><em>Solutions&nbsp;&nbsp; Projects&nbsp;&nbsp; Contact</em></div>
+              <div class="concept-after-content">
+                <img class="concept-after-image" src="/images/solar/rooftop-concept.webp" alt="Illustrative residential home with rooftop solar panels; generated concept image" width="1440" height="810" loading="eager" decoding="async" />
+                <div class="concept-sun" aria-hidden="true">☼</div>
+                <small>RESIDENTIAL ROOFTOP SOLAR</small>
+                <strong>A clearer first<br />conversation starts here.</strong>
+                <p>See what we install, where we work, and how to request a quote.</p>
+                <span class="mock-button mock-green">Request a quote&nbsp; ↗</span>
+                <div class="mock-proof">YOUR SERVICE AREA <b>YOUR REAL PROJECTS</b></div>
+              </div>
+            </div>
+          </div>
+          <figcaption id="concept-caption">Illustrative before-and-after concept only. Generated visual, not a client website, testimonial, or measured result.</figcaption>
+        </figure>
+      </div>
+      <div class="solar-wrap solar-trustline"><span>Built around the work homeowners need to understand</span><b>Services</b><i></i><b>Service area</b><i></i><b>Real projects</b><i></i><b>Enquiry path</b></div>
+    </section>
+
+    <section class="solar-section solar-problem" aria-labelledby="solar-problem-title">
+      <div class="solar-wrap solar-two-col">
+        <div><p class="solar-kicker">A focused website brief</p><h2 id="solar-problem-title">Solar is a considered purchase. Give people a useful place to start.</h2></div>
+        <div class="solar-problem-copy"><p>Homeowners may want to know which systems you work with, whether you serve their location, what an installation involves, and how to request a site visit or quote.</p><p>Your website can answer those first questions with your own verified details, then make the next step obvious on a phone.</p></div>
+      </div>
+      <div class="solar-wrap solar-benefits">
+        <article><span>01 / EXPLAIN</span><h3>Show what you install</h3><p>Present your residential rooftop services and the types of properties you serve in plain language.</p></article>
+        <article><span>02 / BUILD CONTEXT</span><h3>Use your real work</h3><p>Organize installation photos, service locations and project notes you supply. No made-up case studies.</p></article>
+        <article><span>03 / INVITE</span><h3>Make contact simple</h3><p>Give visitors a clear WhatsApp or quote-request route with the key details you need to reply.</p></article>
+      </div>
+    </section>
+
+    <section class="solar-section solar-packages-section" id="solar-packages" aria-labelledby="solar-packages-title">
+      <div class="solar-wrap">
+        <div class="solar-section-heading"><div><p class="solar-kicker">Three fixed-scope starting points</p><h2 id="solar-packages-title">Choose the right first step.</h2></div><p>Prices are one-time project fees. Final page count, content and integrations are confirmed in writing before work begins.</p></div>
+        <div class="solar-packages">
+          {packages.map((pkg, index) => <article class:list={["solar-package", pkg.featured && "is-featured"]}>
+            <div class="package-top"><span>{pkg.featured ? "RECOMMENDED START" : `OPTION 0${index + 1}`}</span>{pkg.featured && <span class="package-badge">Most complete starting scope</span>}</div>
+            <h3>{pkg.name}</h3><p class="package-fit">{pkg.fit}</p><p class="package-price">{pkg.price}<small> one-time</small></p>
+            <ul>{pkg.features.map((feature) => <li><span aria-hidden="true">✓</span>{feature}</li>)}</ul>
+            <a class:list={["solar-button", pkg.featured ? "solar-button-green" : "solar-button-outline"]} href={`${whatsappUrl}%0A%0APackage%20I%E2%80%99m%20considering%3A%20${encodeURIComponent(pkg.name)}`} target="_blank" rel="noopener noreferrer" data-track={`solar_package_${index + 1}`} data-package={pkg.name} data-whatsapp-cta>Ask about this package <span aria-hidden="true">↗</span></a>
+          </article>)}
+        </div>
+        <div class="solar-payment"><span class="payment-mark">50<span>%</span></span><p><strong>Simple payment terms.</strong> 50% advance to book and begin. The remaining 50% is due before launch and final handover. Domain, hosting, paid tools and ad spend are separate third-party costs.</p></div>
+      </div>
+    </section>
+
+    <section class="solar-section solar-next" aria-labelledby="solar-next-title">
+      <div class="solar-wrap">
+        <div class="solar-section-heading"><div><p class="solar-kicker">A sensible service path</p><h2 id="solar-next-title">Build on the website when you’re ready.</h2></div><p>Start with the essentials. Add a separate scope when you know which next step your business needs.</p></div>
+        <div class="solar-next-grid">
+          <article><span>01</span><h3>Local visibility</h3><p>Improve the information and local search foundations that help people understand where you work.</p><small>Separate scope · no ranking promise</small></article>
+          <article><span>02</span><h3>Enquiry optimization</h3><p>Review the questions, page flow and contact handoff after you have real visitor feedback.</p><small>Separate scope · grounded in your data</small></article>
+          <article><span>03</span><h3>Lead acquisition</h3><p>Discuss campaign landing pages and paid traffic once your offer, service area and follow-up process are clear.</p><small>Management and ad spend priced separately</small></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="solar-section solar-process" aria-labelledby="solar-process-title">
+      <div class="solar-wrap solar-two-col">
+        <div><p class="solar-kicker">Clear scope. Direct collaboration.</p><h2 id="solar-process-title">From brief to handover.</h2><p class="process-intro">You work directly with the engineer building your site. Scope and price are agreed before work starts.</p></div>
+        <ol class="process-list"><li><span>01</span><div><h3>Share the basics</h3><p>Your business, service locations, services and preferred package.</p></div></li><li><span>02</span><div><h3>Confirm the scope</h3><p>We agree pages, content, assets, third-party costs and project price in writing.</p></div></li><li><span>03</span><div><h3>Review the build</h3><p>We create the pages and share a preview for feedback within the agreed scope.</p></div></li><li><span>04</span><div><h3>Launch and hand over</h3><p>After final payment, the site and agreed assets are handed over to you.</p></div></li></ol>
+      </div>
+    </section>
+
+    <section class="solar-section solar-qualify" id="solar-brief" aria-labelledby="solar-brief-title">
+      <div class="solar-wrap solar-qualify-grid">
+        <div><p class="solar-kicker">A short project brief</p><h2 id="solar-brief-title">Tell us where to begin.</h2><p>Choose a few details and we’ll place them in a WhatsApp message for you to review and send.</p><p class="solar-privacy-note">Nothing is sent until you choose to send it in WhatsApp.</p></div>
+        <form class="solar-form" id="solar-qualifier" data-phone={CONTACT.phone.replace(/\D/g, "")}>
+          <label for="solar-city">Where do you serve?</label>
+          <input id="solar-city" name="city" autocomplete="address-level2" placeholder="City or service area" required />
+          <label for="solar-presence">What do you have online today?</label>
+          <select id="solar-presence" name="presence" required><option value="" selected disabled>Choose one</option><option>A website I want to improve</option><option>A basic or one-page website</option><option>No website yet</option><option>Not sure / still deciding</option></select>
+          <label for="solar-package">Which scope sounds closest?</label>
+          <select id="solar-package" name="package" required><option value="" selected disabled>Choose a package</option>{packages.map((pkg) => <option value={pkg.name}>{pkg.name} — {pkg.price}</option>)}<option>Help me choose</option></select>
+          <button class="solar-button solar-button-whatsapp" type="submit" data-track="solar_qualification_submit">Continue to WhatsApp <span aria-hidden="true">↗</span></button>
+          <p class="form-hint">Your message opens for review. You can edit it before sending.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="solar-section solar-faq" aria-labelledby="solar-faq-title">
+      <div class="solar-wrap solar-faq-layout"><div><p class="solar-kicker">Straight answers</p><h2 id="solar-faq-title">Before we begin.</h2></div><div class="solar-faq-list">{faqs.map(({ q, a }) => <details><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></div>
+    </section>
+
+    <section class="solar-final" aria-labelledby="solar-final-title"><div class="solar-wrap solar-final-inner"><div><p class="solar-kicker">NextReach Studio · Pune, working across India</p><h2 id="solar-final-title">Ready to scope your solar website?</h2><p>Share your service area and what you want the site to help visitors do.</p></div><a class="solar-button solar-button-whatsapp" href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-track="solar_final_whatsapp" data-whatsapp-cta>Start a WhatsApp conversation <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <div class="solar-mobile-cta"><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-track="solar_mobile_whatsapp" data-whatsapp-cta><span aria-hidden="true">◉</span> Discuss your solar website <span aria-hidden="true">↗</span></a></div>
+  <footer class="studio-footer studio-container solar-footer">
+    <a href="/" class="studio-footer-brand"><img src="/brand/logo-mark.png" width="28" height="35" alt="" />NextReach <span>Studio</span></a>
+    <div class="studio-footer-links"><a href="/services/">Services</a><a href="/solar-installers/">Solar Installers</a><a href="/blog/">Blog</a><a href="/guides/">Guides</a><a href="/resources/">Resources</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+    <div class="studio-footer-bottom"><span>© {new Date().getFullYear()} NextReach Studio</span><span>Thoughtfully designed. Carefully engineered.</span></div>
+  </footer>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script>
+    const form = document.querySelector<HTMLFormElement>("#solar-qualifier");
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const message = [
+        "Hi NextReach Studio, I’m a residential rooftop solar installer and would like to discuss a website.",
+        `My service area: ${data.get("city")}`,
+        `My current website: ${data.get("presence")}`,
+        `Package I’m considering: ${data.get("package")}`,
+      ].join("\n");
+      const phone = form.dataset.phone;
+      if (!phone) return;
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      const analyticsWindow = window as Window & { gtag?: (...args: unknown[]) => void };
+      analyticsWindow.gtag?.("event", "solar_qualification_completed", { cta_location: window.location.pathname });
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+  </script>
+  <style>
+    .solar-page{--s-ink:var(--studio-ink);--s-muted:var(--studio-muted);--s-paper:var(--studio-bg);--s-white:var(--studio-bg);--s-line:var(--studio-line);--s-green:var(--studio-accent);--s-green-dark:color-mix(in srgb,var(--studio-accent) 80%,black);--s-rust:var(--studio-accent);background:var(--studio-bg);color:var(--studio-ink);font-family:var(--font-body);padding-top:52px;padding-bottom:76px}
+    .solar-page :is(h1,h2,h3){font-family:var(--font-display);letter-spacing:-.045em;color:var(--s-ink)}
+    .solar-wrap{width:min(1400px,calc(100% - 112px));margin-inline:auto}.solar-page a:focus-visible,.solar-page button:focus-visible,.solar-page input:focus-visible,.solar-page select:focus-visible,.solar-page summary:focus-visible{outline:2px solid var(--studio-accent);outline-offset:4px}
+    .solar-site-shell{min-height:100vh}
+    .solar-hero{padding:65px 0 0;background:radial-gradient(ellipse at 86% 14%,color-mix(in srgb,var(--studio-accent) 9%,transparent) 0,transparent 35%),var(--s-paper);overflow:hidden}.solar-hero-grid{display:grid;grid-template-columns:.92fr 1.08fr;align-items:center;gap:56px}.solar-eyebrow,.solar-kicker{margin:0 0 18px;color:var(--s-rust);font-family:"Studio Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}.solar-eyebrow{display:flex;gap:10px;align-items:center}.solar-eyebrow span{width:8px;height:8px;border-radius:50%;background:var(--studio-accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--studio-accent) 16%,transparent)}.solar-hero h1{font-size:clamp(42px,5.5vw,68px);font-weight:700;line-height:.99;margin:0;max-width:650px}.solar-hero h1 span{display:block;color:var(--studio-accent)}.solar-lede{font-size:17px;line-height:1.7;color:var(--s-muted);max-width:560px;margin:23px 0 0}.solar-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:28px}.solar-button{display:inline-flex;align-items:center;justify-content:center;gap:13px;min-height:50px;padding:13px 19px;border:1px solid transparent;border-radius:0;text-decoration:none;font-size:13px;font-weight:700;transition:transform .18s,background .18s,border-color .18s}.solar-button:hover{transform:translateY(-2px)}.solar-button-whatsapp,.solar-button-green{background:var(--s-green);color:var(--studio-on-accent)}.solar-button-whatsapp:hover,.solar-button-green:hover{background:var(--s-green-dark)}.solar-secondary-link{font-size:13px;font-weight:700;color:var(--s-ink);text-decoration:none;border-bottom:1px solid #a5a99c;padding:9px 0}.solar-note{font-size:11px;color:var(--s-muted);margin:15px 0 0}
+    .solar-concept{margin:0;background:var(--studio-surface);border:1px solid var(--studio-line);padding:18px;border-radius:0;box-shadow:0 25px 65px #292b2420;transform:rotate(.45deg)}.concept-topline,.concept-label{display:flex;justify-content:space-between;font:10px var(--font-mono);letter-spacing:.08em;color:var(--s-muted)}.concept-panels{display:grid;grid-template-columns:.83fr 1.17fr;gap:12px;margin-top:14px}.concept-panel{background:#fffefa;color:#242522;border:1px solid #d8d8ce;border-radius:0;overflow:hidden;min-width:0}.concept-panel strong{color:#242522}.concept-panel>p{margin:0;padding:8px 10px;color:#56564f;font-size:9px;line-height:1.45;border-top:1px solid #d8d8ce}.concept-label{padding:11px 10px;justify-content:flex-start;gap:9px;letter-spacing:0}.concept-label span{color:var(--s-rust)}.concept-browser{height:26px;background:#f0f0eb;border-block:1px solid #e1e1d9;display:flex;align-items:center;gap:4px;padding:0 8px;position:relative}.concept-browser>span{height:4px;width:4px;background:#b5b7ad;border-radius:50%}.concept-browser b{font:600 6px "Studio Mono",monospace;color:#4b4e47;margin-left:6px}.concept-browser em{font:6px var(--font-body);color:#696b63;margin-left:auto;font-style:normal}.concept-before-content{min-height:220px;padding:20px 13px;background:linear-gradient(180deg,#f0eee7 0 42%,#fffefa 42%)}.mock-roof{height:54px;width:80%;margin:0 auto 13px;background:linear-gradient(155deg,transparent 47%,#858c7b 48% 51%,transparent 52%),linear-gradient(25deg,transparent 47%,#858c7b 48% 51%,transparent 52%);position:relative}.mock-roof i{display:inline-block;width:20px;height:12px;border:1px solid #8b9786;background:#cfdac9;margin:28px 0 0 3px;transform:skewY(-25deg)}.concept-before-content small,.concept-after-content small{display:block;font:7px "Studio Mono",monospace;color:#777a70;letter-spacing:.08em}.concept-before-content strong{display:block;font-size:14px;line-height:1.14;margin:8px 0}.mock-line{height:4px;width:88%;background:#dedfd8;border-radius:4px;margin:6px 0}.mock-line.short{width:58%}.mock-button{display:inline-flex;background:#eeeae2;color:#45473e;padding:7px 10px;border-radius:3px;font-size:7px;margin-top:5px}.concept-after-content{min-height:220px;padding:18px 15px;background:linear-gradient(130deg,#f7f6f2,#eeede8);color:#242522}.concept-sun{float:right;color:#97402e;font-size:38px;line-height:1}.concept-after-content small{font-size:6px}.concept-after-content strong{display:block;font-size:20px;line-height:1.05;margin:14px 0 8px}.concept-after-content p{font-size:8px;color:#56564f;max-width:190px;line-height:1.5;margin:0 0 12px}.mock-button.mock-green{background:var(--studio-accent);color:var(--studio-on-accent);font-size:7px;padding:8px 11px}.mock-proof{margin-top:15px;border-top:1px solid #ced3c6;padding-top:8px;font:6px "Studio Mono",monospace;color:#70746a}.mock-proof b{float:right;color:#4d594c}.solar-concept figcaption{font-size:9px;color:var(--s-muted);padding:11px 2px 1px}.solar-trustline{display:flex;align-items:center;gap:18px;border-top:1px solid var(--s-line);margin-top:55px;padding:17px 0;color:var(--s-muted);font:10px var(--font-mono);flex-wrap:wrap}.solar-trustline span{margin-right:auto}.solar-trustline b{font-weight:500;color:#42453e}.solar-trustline i{height:3px;width:3px;background:#a3a69a;border-radius:50%}
+    .solar-section{padding:92px 0}.solar-two-col{display:grid;grid-template-columns:1fr .8fr;gap:90px;align-items:start}.solar-section h2,.solar-final h2{font-size:clamp(34px,4vw,51px);line-height:1.02;margin:0;max-width:610px}.solar-problem-copy{padding-top:34px;color:var(--s-muted);font-size:15px;line-height:1.8}.solar-problem-copy p{margin:0 0 15px}.solar-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:53px}.solar-benefits article{border-top:1px solid var(--studio-line);padding-top:15px}.solar-benefits article>span,.solar-next-grid article>span{font:10px "Studio Mono",monospace;color:var(--s-rust);letter-spacing:.1em}.solar-benefits h3,.solar-next-grid h3{font-size:22px;margin:16px 0 8px}.solar-benefits p,.solar-next-grid p{font-size:13px;line-height:1.7;color:var(--s-muted);margin:0}
+    .solar-packages-section{background:var(--studio-surface)}.solar-section-heading{display:flex;justify-content:space-between;align-items:end;gap:36px;margin-bottom:35px}.solar-section-heading .solar-kicker{margin-bottom:13px}.solar-section-heading>p{max-width:360px;color:var(--s-muted);font-size:12px;line-height:1.7;margin:0 0 5px}.solar-packages{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}.solar-package{background:var(--s-white);border:1px solid var(--studio-line);border-radius:0;padding:23px;display:flex;flex-direction:column;min-width:0}.solar-package.is-featured{border:2px solid var(--studio-accent);box-shadow:0 14px 35px color-mix(in srgb,var(--studio-accent) 13%,transparent);transform:translateY(-8px)}.package-top{display:flex;justify-content:space-between;align-items:center;gap:7px;font:9px var(--font-mono);color:var(--s-muted);min-height:22px}.solar-package.is-featured .package-top>span:first-child{color:var(--studio-accent)}.package-badge{font:9px var(--font-body);color:var(--studio-on-accent);background:var(--studio-accent);padding:5px 7px;border-radius:0}.solar-package h3{font-size:23px;line-height:1.05;margin:20px 0 5px}.package-fit{font-size:11px;color:var(--s-muted);margin:0;min-height:32px}.package-price{font-size:32px;font-weight:700;letter-spacing:-.06em;margin:20px 0;border-bottom:1px solid #e1e2da;padding-bottom:17px}.package-price small{font-size:10px;letter-spacing:0;font-weight:400;color:var(--s-muted)}.solar-package ul{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:11px;flex:1}.solar-package li{display:flex;gap:9px;align-items:flex-start;font-size:11px;line-height:1.5;color:var(--s-ink)}.solar-package li span{color:var(--studio-accent);font-weight:700}.solar-package .solar-button{width:100%;font-size:11px;padding-inline:10px}.solar-button-outline{border-color:var(--studio-line);background:transparent;color:var(--s-ink)}.solar-button-outline:hover{background:var(--studio-surface);border-color:var(--studio-accent)}.solar-payment{display:flex;align-items:center;gap:18px;max-width:790px;margin:33px auto 0;background:var(--studio-bg);border:1px solid var(--studio-line);border-radius:0;padding:15px 20px}.payment-mark{font-size:29px;color:var(--studio-accent);font-weight:700;letter-spacing:-.08em;white-space:nowrap}.payment-mark span{font-size:15px}.solar-payment p{font-size:11px;line-height:1.6;color:var(--s-muted);margin:0}.solar-payment strong{color:var(--s-ink)}
+    .solar-next{background:var(--studio-surface);color:var(--s-ink)}.solar-next h2,.solar-next-grid h3{color:var(--s-ink)}.solar-next .solar-kicker,.solar-next-grid article>span,.solar-next-grid small{color:var(--s-rust)}.solar-next .solar-section-heading>p,.solar-next-grid p{color:var(--s-muted)}.solar-next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:39px}.solar-next-grid article{padding:24px;border:1px solid var(--s-line);background:var(--s-paper)}.solar-next-grid p{min-height:70px}.solar-next-grid small{display:block;border-top:1px solid var(--s-line);padding-top:12px;margin-top:16px;font-size:10px}
+    .solar-process{background:var(--studio-bg)}.process-intro{font-size:14px;line-height:1.7;color:var(--s-muted);max-width:410px;margin-top:20px}.process-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--s-line)}.process-list li{display:grid;grid-template-columns:46px 1fr;gap:12px;padding:17px 0;border-bottom:1px solid var(--s-line)}.process-list li>span{font:11px "Studio Mono",monospace;color:var(--s-rust);padding-top:3px}.process-list h3{font-size:17px;margin:0 0 4px}.process-list p{color:var(--s-muted);font-size:12px;line-height:1.6;margin:0}
+    .solar-qualify{background:var(--studio-surface)}.solar-qualify-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:90px;align-items:start}.solar-qualify-grid>div>p:not(.solar-kicker){font-size:14px;color:var(--s-muted);line-height:1.7;max-width:440px}.solar-qualify-grid>div .solar-privacy-note{font-size:11px;margin-top:25px}.solar-form{background:var(--s-white);padding:27px;border-radius:0;border:1px solid var(--studio-line);display:grid;gap:9px}.solar-form label{font-size:11px;font-weight:700;margin-top:5px}.solar-form input,.solar-form select{height:46px;background:var(--studio-bg);border:1px solid var(--studio-line);border-radius:0;padding:0 12px;font:13px var(--font-body);color:var(--s-ink);width:100%}.solar-form input::placeholder{color:var(--s-muted)}.solar-form button{margin-top:12px;border:0;cursor:pointer}.form-hint{font-size:10px;color:var(--s-muted);margin:0}.solar-faq{background:var(--studio-bg)}.solar-faq-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:60px}.solar-faq-list{border-top:1px solid var(--s-line)}.solar-faq details{border-bottom:1px solid var(--s-line)}.solar-faq summary{padding:18px 4px;list-style:none;display:flex;justify-content:space-between;gap:20px;cursor:pointer;font-size:13px;font-weight:700}.solar-faq summary::-webkit-details-marker{display:none}.solar-faq summary span{color:var(--studio-accent);font-size:19px;transition:transform .2s}.solar-faq details[open] summary span{transform:rotate(45deg)}.solar-faq details p{margin:0;padding:0 35px 18px 4px;color:var(--s-muted);font-size:12px;line-height:1.75}
+    .solar-final{background:var(--studio-surface);padding:52px 0}.solar-final-inner{display:flex;justify-content:space-between;align-items:center;gap:30px}.solar-final .solar-kicker{margin-bottom:12px}.solar-final h2{font-size:clamp(30px,4vw,44px)}.solar-final p:not(.solar-kicker){margin:10px 0 0;color:var(--s-muted);font-size:13px}.solar-mobile-cta{display:none}
+    @media(max-width:1279px){.solar-page{padding-bottom:83px}.solar-mobile-cta{position:fixed;bottom:0;left:0;right:0;z-index:60;display:block;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--studio-nav-bg);backdrop-filter:blur(14px);border-top:1px solid var(--studio-line)}.solar-mobile-cta a{min-height:48px;border-radius:0;background:var(--studio-accent);color:var(--studio-on-accent);text-decoration:none;display:flex;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:700}.solar-mobile-cta a span:first-child{font-size:11px}}
+    @media(max-width:900px){.solar-hero-grid{grid-template-columns:1fr;gap:38px}.solar-hero-copy{max-width:740px}.solar-concept{max-width:680px;margin-inline:auto;width:100%;transform:none}.solar-hero{padding-top:45px}.solar-hero h1{max-width:730px}.solar-two-col,.solar-qualify-grid{gap:45px}.solar-package{padding:18px}.solar-package h3{font-size:20px}.package-badge{font-size:8px}.solar-payment{margin-top:25px}}
+    @media(max-width:640px){.solar-page{padding-top:72px}.solar-wrap{width:calc(100% - 36px)}.solar-hero{padding-top:36px}.solar-hero-grid{gap:30px}.solar-hero h1{font-size:clamp(40px,11vw,56px)}.solar-lede{font-size:15px}.solar-actions{align-items:stretch;gap:16px;flex-direction:column}.solar-actions .solar-button{width:100%}.solar-secondary-link{align-self:flex-start}.solar-concept{padding:11px;border-radius:0}.concept-panels{gap:7px}.concept-label{font-size:8px;padding:8px 6px;gap:5px}.concept-before-content,.concept-after-content{min-height:190px;padding:13px 9px}.concept-before-content strong{font-size:11px}.concept-after-content strong{font-size:15px}.concept-browser{padding:0 5px}.concept-browser em{font-size:5px}.concept-before-content small,.concept-after-content small{font-size:5px}.concept-sun{font-size:29px}.concept-after-content p{font-size:7px}.solar-trustline{margin-top:33px;gap:9px 12px;font-size:8px}.solar-trustline span{width:100%;margin:0 0 3px}.solar-section{padding:65px 0}.solar-two-col,.solar-qualify-grid,.solar-faq-layout{grid-template-columns:1fr;gap:26px}.solar-section h2,.solar-final h2{font-size:37px}.solar-problem-copy{padding:0;font-size:14px}.solar-benefits{grid-template-columns:1fr;gap:23px;margin-top:35px}.solar-benefits h3{margin-top:10px}.solar-section-heading{align-items:start;flex-direction:column;gap:15px;margin-bottom:25px}.solar-section-heading>p{max-width:unset}.solar-packages{grid-template-columns:1fr;gap:13px}.solar-package{padding:21px}.solar-package.is-featured{transform:none;order:-1}.package-fit{min-height:0}.solar-package ul{gap:9px}.solar-payment{align-items:flex-start;padding:14px;gap:13px}.solar-next-grid{grid-template-columns:1fr;gap:10px;margin-top:27px}.solar-next-grid article{padding:20px}.solar-next-grid p{min-height:0}.solar-qualify-grid{gap:20px}.solar-form{padding:20px}.solar-faq-layout{gap:15px}.solar-faq summary{font-size:12px;line-height:1.5}.solar-final{padding:40px 0}.solar-final-inner{align-items:stretch;flex-direction:column}.solar-final-inner .solar-button{width:100%}}
+    .concept-after-image{display:block;width:100%;height:98px;object-fit:cover;margin:0 0 12px}.solar-footer{padding-top:34px}.solar-page :is(figure,.concept-panel,.solar-package,.solar-form,.solar-payment,.solar-button,.solar-mobile-cta a,.solar-form input,.solar-form select,.solar-next-grid article){border-radius:0}.solar-eyebrow span{border-radius:50%}
+    @media(prefers-reduced-motion:reduce){.solar-page *{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</Layout>

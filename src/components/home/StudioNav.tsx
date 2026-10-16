@@ -15,27 +15,12 @@ const groups: Record<string, { label: string; href: string }[]> = {
     { label: "API Integration", href: "/services/api-integration-pune/" },
     { label: "AI Consulting", href: "/services/ai-consulting-pune/" },
   ],
-  // Listed explicitly rather than slugified from the label: one of these pages has a
-  // slug ("saas-tech-startups-pune") that no label-to-slug rule would produce, which is
-  // how it went missing from this menu before.
-  Industries: [
-    { label: "Manufacturing", href: "/industries/manufacturing/" },
-    { label: "Logistics", href: "/industries/logistics/" },
-    { label: "Education", href: "/industries/education/" },
-    { label: "Real Estate", href: "/industries/real-estate/" },
-    { label: "Healthcare", href: "/industries/healthcare/" },
-    { label: "Retail", href: "/industries/retail/" },
-    { label: "Restaurants", href: "/industries/restaurants/" },
-    { label: "Construction", href: "/industries/construction/" },
-    { label: "SaaS & Tech Startups", href: "/industries/saas-tech-startups-pune/" },
-    { label: "Pet Grooming", href: "/industries/pet-grooming/" },
-  ],
   Resources: ["Blog", "Guides", "Tools", "Resources"].map(label => ({ label, href: `/${label.toLowerCase()}/` })),
 };
 
 const links = [
   { label: "Services", href: "/services/" },
-  { label: "Industries", href: "/industries/restaurants/" },
+  { label: "Solar Installers", href: "/solar-installers/" },
   { label: "Portfolio", href: "/portfolio/" },
   { label: "About", href: "/about/" },
   { label: "Resources", href: "/resources/" },
