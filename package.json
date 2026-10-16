@@ -1,5 +1,5 @@
 {
-  "name": "nextreach-studio-bloom",
+  "name": "nextreach-studio",
   "version": "3.0.0",
   "private": true,
   "type": "module",
@@ -16,7 +16,6 @@
     "@astrojs/react": "^5.0.0",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.7.3",
-    "@astrojs/vercel": "^10.0.0",
     "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.3.0",
@@ -35,6 +34,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "lighthouse": "^13.5.0",
-    "typescript": "^6.0.0"
+    "typescript": "^6.0.0",
+    "wrangler": "^4.151.1"
   }
 }

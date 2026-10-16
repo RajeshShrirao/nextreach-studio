@@ -27,7 +27,7 @@
   - PDF Brochure: `public/brochure.pdf` (legacy `/NextReach-Studio-Brochure.pdf` redirects here)
   - Visual Brand Book & Download Library: `/brand/book` & `/brand`
 
-Canonical marketing imagery lives in `public/assets/demos/`, with the quick-launch profile at `public/assets/demo-profile.jpg`. Standalone projects under `demos/` retain their own assets so they can deploy independently. Public aliases for consolidated assets are listed in `vercel.json`.
+Canonical marketing imagery lives in `public/assets/demos/`, with the quick-launch profile at `public/assets/demo-profile.jpg`. Standalone projects under `demos/` retain their own assets so they can deploy independently. Public aliases for consolidated assets are listed in `public/_redirects` (ported from the now-removed `vercel.json`).
 
 ---
 
